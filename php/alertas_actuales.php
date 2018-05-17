@@ -3,7 +3,7 @@
 	require_once('./conexion.php');
 	$c_con= new Conexion();
 	$con=$c_con->conectar();
-	//SE LLAMA A LA FUNCION EN LA BD QUE SE ENCARGA DE TRAERNOS LOS DATOS DE LA ULTIMA COMUNICACION PARA EL RASPBERRY Y ASI ENVIARLO 
+	//SE LLAMA A LA FUNCION EN LA BD QUE SE ENCARGA DE TRAERNOS LOS DATOS DE LA ULTIMA COMUNICACION RECIBIDAS DESDE EL RASPBERRY Y ASI ENVIARLO A  LA PAGINA PRINCIPAL 
 	try{
 		$res=pg_query($con,"SELECT ultima_comunicacion()");
 		$data["data"]=pg_fetch_assoc($res);
