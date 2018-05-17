@@ -1,0 +1,92 @@
+<div id="register" class="jumbotron">
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4 col-xs-offset-2 col-xs-8">
+             <!--LOGO-->
+            <div class="col-md-12" style="text-align:center;">
+                 <img src="image/assets/logo.png"  style="margin-bottom:14px;">
+            </div>
+           
+            <!---->
+         
+            <!--FORMS-->
+            <form class="form-horizontal" id="formulario_registro" name="form" ng-submit="_register()" role="form">
+                <!---->
+                <div class="mb-3">
+                    <label for="Type">Tipo</label>
+                    <select class="custom-select d-block w-100" id="Type" required="" ng-model="register.type" style="height: 100%;">
+                        <option value="">Tipo</option>
+                        <option value="Comercializadora">
+                            Comercializadora
+                        </option>
+                        <option value="Fabricante">Fabricante</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        por favor seleccione un tipo valido
+                    </div>
+                </div>
+                <!---->
+                <div>
+
+                    <div class="mb-3">
+                        <label for="username">Nombre:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="name" placeholder="Nombre" required="" ng-model="register.name">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Your username is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pass">Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="pass" placeholder="Nombre" required="" ng-model="register.pass">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Your pass is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username">Usuario: <span class="text-muted">(Optional)</span></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Usuario" ng-model="register.username">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Email: <span class="text-muted">(Optional)</span></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" ng-model="register.email">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tel">Telefono:</label>
+                        <input type="number" class="form-control" name="tel" placeholder="555 55 55" ng-model="register.phone">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary btn-lg btn-block">Guardar</button>
+                    </div>
+                </div>
+                   <!--/MENSAJES-->
+            <div ng-show="error" class="alert alert-danger">
+                {{error}}
+            </div>
+            <div ng-show="info" class="alert alert-info">
+                {{info}}
+            </div>
+            <!--/.MENSAJES-->
+            </form>
+            <!--/.FORMS-->
+        </div>
+    </div>
+</div>
+

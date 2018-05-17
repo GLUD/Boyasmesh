@@ -1,0 +1,159 @@
+/*-------------------------
+LOGIN
+---------------------------*/
+
+/***++++++++
+FORMULARIO
++++++++++***/
+#login input {
+	border:none;
+	border-radius: 0;
+	padding:22px 14px;
+}
+
+#login #username{
+	border-bottom:1px grey solid;
+	border-top-right-radius:8px; 
+	border-top-left-radius: 8px;
+}
+
+#login #password{
+	border-bottom-right-radius:8px; 
+	border-bottom-left-radius: 8px;
+}
+
+/*ADMIN*/
+
+.estadisticas .glyphicon{
+	font-size: 3em !important;
+}
+
+.form-group input{
+	border:solid #ccc 1px;
+}
+
+
+.help-block{
+	color:red;
+}
+
+.back-edukid{
+	font-size: 0.8em;
+	color:white;
+	background:orange;
+	border-radius:10px;
+	padding:4px 4px;
+	
+	transition: opacity 1s;
+}
+.back-edukid:hover{
+	color:white;
+	text-decoration: none;
+	opacity: 0.7;
+}
+
+.credits{
+	margin-top:14px;
+}
+
+/*ASSETS*/ 
+
+.border-blue{
+	border-color:blue !important;
+}
+
+
+/*UPLOAD*/
+
+.thumb {
+    width: 120px;
+    /*height: 24px;*/
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+}
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+
+
+/*
+	
+	DATEPICKER
+
+*/
+
+
+
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+
+
+
+ /*
+
+
+
+ */
+
+  form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
+  }
+
+/*IMG FORM DIRECTIVE UPLOAD PHOTO*/
+.image-cont.first-img{
+	height: 160px;
+    line-height: 160px;
+    margin: 0 auto;
+    width: 165px;
+    opacity: .6;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    border: 1px dashed #607d8b;
+}
+
+.image-cont .image{
+	background: #eceff1;
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/**/
+
+form select, form input[type="text"], form.atto_form input[type="url"], select.singleselect{
+    max-width: none !important;
+}
+
+
+
+
+

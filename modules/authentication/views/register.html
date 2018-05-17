@@ -1,0 +1,97 @@
+<!--
+        @TEMPLATE = REGISTER 
+
+        ng-submit="_register()"
+
+        $scope.register {
+                    type : 'Comercializadora || Fabricante',
+                    name : '',
+                    user : '',
+                    email: '',
+                    phone: '',
+                    pass : '',
+        }
+        
+        @MENSAJES -> $scope.error , $scope.info
+
+-->
+<main class="auth">
+    <header id="auth-header" class="auth-header" style="background:black;">
+        <h1>
+          <img src="image/assets/logo.png" alt="" height="72">
+          <span class="sr-only">Registro</span>
+        </h1>
+        <p> Ya tienes una cuenta? por favor
+            <a href="#/login">Ingresar</a>
+        </p>
+        <!--
+      <canvas class="particles-js-canvas-el" width="2880" height="522" style="width: 100%; height: 100%;"></canvas>
+  -->
+    </header>
+    <!-- form -->
+    <form class="auth-form" ng-submit="_register()" >
+       
+        <!-- .form-group -->
+        <div class="form-group">
+            <div class="form-label-group">
+                <input type="email" id="email" class="form-control" placeholder="Email" required="" autofocus="" ng-model="register.email">
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group">
+            <div class="form-label-group">
+                <input type="text" id="username" class="form-control" placeholder="Username" required="" ng-model="register.username">
+                <label for="username">Usuario</label>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group">
+            <div class="form-label-group">
+                <input type="password" id="pass" class="form-control" placeholder="Password" required="" ng-model="register.pass">
+                <label for="pass">Contraseña</label>
+            </div>
+        </div>
+        <!-- /.form-group -->
+         <!-- .form-group -->
+        <div class="form-group">
+            <div class="form-label-group">
+                <input type="password" id="pass2" class="form-control" placeholder="Repita su Contraseña" required="" ng-model="register.pass2">
+                <label for="pass2">Repita su Contraseña</label>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+        </div>
+          <div class="form-group">
+         <div ng-show="error" class="alert alert-danger">
+                {{error}}
+            </div>
+            <div ng-show="info" class="alert alert-info">
+                {{info}}
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group text-center">
+            <div class="custom-control custom-control-inline custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="newsletter">
+                <label class="custom-control-label" for="newsletter">Quiero Recibir informacion en mi correo</label>
+            </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- recovery links -->
+        <p class="text-center text-muted mb-0"> Al crear una cuenta usted acepta los 
+            <a href="#">Terminos de Uso </a> y las
+            <a href="#">Politicas de Privacidad </a>. 
+        </p>
+        <!-- /recovery links -->
+    </form>
+    <!-- /.auth-form -->
+    <!-- copyright -->
+    <footer class="auth-footer"> © 2018 All Rights Reserved. </footer>
+</main>

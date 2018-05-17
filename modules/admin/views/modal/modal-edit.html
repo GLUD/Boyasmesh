@@ -1,0 +1,272 @@
+<div class="modal-header" style="background:blue;">
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="gridSystemModalLabel" style="color:white;">{{title}}</h4>
+</div>
+<div class="modal-body">
+    <uib-accordion close-others="oneAtATime">
+        <!--MODIFICAR DATOS-->
+        <div ng-if="panel.update" uib-accordion-group class="panel-success" heading="Actualizar Datos">
+            <div class="row">
+                <div ng-repeat="input in inputs" ng-class="[input.class.Num1,input.class.Num2]">
+                    <div ng-if="input.current == 'input' " ng-class="[input.class.group,{'has-error':myForm[input.typeModel].$error.required,'has-success':!myForm[input.typeModel].$error.required}]">
+                        <span ng-class="[input.class.span]">
+                    <span class="glyphicon glyphicon-{{input.icon}}"> </span>
+                        </span>
+                        <input type="{{input.type}}" ng-class="[input.class.input]" ng-model="input.model[input.typeModel]" placeholder="{{input.place}}" name="{{input.typeModel}}" ng-required="input.required.status" />
+                    </div>
+                    <br ng-if="input.separator">
+                    <!--textarea-->
+                    <div ng-if="input.current == 'textarea'" class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <small ng-repeat="text in input.texts">{{text}}</small>
+                            <textarea type="text" class="form-control border-blue" ng-model="input.model[input.typeModel]" placeholder=" {{input.place}}" aria-describedby="clase-content" required></textarea>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <button ng-click="updateData(data)" class="btn btn-success">Actualizar</button>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <span class="progress" ng-show="progress >= 0">
+                        <uib-progressbar animate="false" value="progress" type="success"><b>{{progress}}%</b></uib-progressbar>
+                     </span>
+                </div>
+            </div>
+        </div>
+        <!--/.MODIFICAR DATOS-->
+        <!--SELECT-->
+        <div ng-if="panel.select.status" uib-accordion-group class="panel-success" heading="{{panel.select.title}}">
+            <div class="row">
+                <p ng-show="!panel.select.data">{{panel.select.show[0]}}</p>
+                <p ng-show="panel.select.data">{{panel.select.show[1]}}</p>
+                <!---->
+                <div ng-show="!panel.select.data" class="table-responsive" style="border: solid 1px #ccc;height: 300px;overflow: hidden;overflow-y: scroll;">
+                    <table class="table" st-table="displayedData" st-safe-src="panel.select.get">
+                        <thead>
+                            <tr ng-if="panel.select.search">
+                                <td colspan="{{panel.select.tableHeaders.length}}">
+                                    <input st-search class="input-sm form-control" type="search" placeholder="buscar" style="color:black;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th ng-repeat="header in panel.select.tableHeaders">{{header}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in displayedData">
+                                <td>
+                                    <input type="radio" name="selectData" ng-model="$root.selectData" ng-value="data">
+                                </td>
+                                <!---->
+                                <td ng-repeat="d in data">{{d}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <button ng-show="!panel.select.data" ng-click="updateSelect()" class="btn btn-success">Actualizar</button>
+                <button ng-show="panel.select.data" ng-click="changeSelect()" class="btn btn-success">Cambiar</button>
+            </div>
+        </div>
+        <!--/.SELECT-->
+        <!--PICTURE-->
+        <div ng-if="panel.picture" uib-accordion-group class="panel-success" heading="Cambiar Foto">
+            <!--/* */-->
+            <div class="row" >
+                <!--FOTO-->
+                <div class="col-md-12 col-xs-12" style="text-align:center;">
+                    <div class="form-group">
+                        <label>Cambiar Foto</label>
+                        <!---->
+                        <div class="image-cont first-img" >
+                            <div ng-if="data.img" class="image" style="background-image:url({{url.img}}/{{data.img}})">
+                            </div>
+                            <div ng-if ="!data.img" class="image" ng-click="modalPicture()" ng-show="!myForm.file.$valid">
+                                <span class="glyphicon glyphicon-camera" style="transform:scale(4);">
+                                </span>
+                            </div>
+                            <div class="image" ng-show="myForm.file.$valid" ngf-background="data.picfile">
+
+                            </div>
+                            <div class="overlay-image"></div>
+                            <span class="remove icons-material icon-material-close"></span>
+                        </div>
+                        <!---->
+                        <div class="btn btn-success" ng-click="modalPicture()">cambiar</div>
+
+                        <div  ng-show="data.picfile" class="btn btn-primary" ng-click="updatePicture(data)"> Guardar</div>
+
+                        <input id="fileUploadModal" type="file" ngf-select ng-model="data.picfile" name="file" accept="image/*" ngf-max-size="2MB" ng-required="uploadPicture.required" ngf-model-invalid="errorFile" style="display:none;">
+                        <!---->
+
+                        <p class="help-block">Tamaño recomendado 140px * 140px</p>
+                        <i ng-show="myForm.file.$error.required">*required</i>
+                        <br>
+                        <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <!--<img ng-show="myForm.file.$valid" ngf-thumbnail="data.picfile" class="thumb">-->
+                            <button class="btn" ng-click="data.picfile = null" ng-show="data.picfile">Remove</button>
+                   
+                    
+                </div>
+                <!--/.FOTO-->
+            </div>
+        </div>
+        <!--/.PICTURE-->
+        <!--CAMBIAR ESTADO-->
+        <div ng-if="panel.state" uib-accordion-group class="panel-success" heading="Cambiar Estado">
+            <p>{{panel.state.title}}</p>
+            <p><span ng-class="{label:true, 'label-primary': data.estado == 'activo' || true, 'label-danger': data.estado == 'inactivo' || false }">{{data.estado}}</span> &nbsp;
+                <input type="checkbox" ng-checked="data.estado == 'activo' " ng-click="changeCheckbox()" style="display:inline-block;" /> </p>
+            <button ng-click="updateEstado(data)" class="btn btn-success">Actualizar</button>
+        </div>
+        <!--/.CAMBIAR ESTADO-->
+        <!--RESETAR CONTRASEÑA-->
+        <div ng-if="panel.reset" uib-accordion-group class="panel-success" heading="Resetear Contraseña">
+            <div class="form-group">
+                <label for="email">Resetear Contraseña</label>
+                <input ng-model="data.newpassword" placeholder="Nueva Contraseña">
+                <button ng-click="changePassword(data)" class="btn btn-default"> Resetear y Enviar</button>
+                <p>la nueva contraseña se enviara a {{data.email}}</p>
+            </div>
+        </div>
+        <!--/.RESETAR CONTRASEÑA-->
+        <!--APODERADO-->
+        <div ng-if="panel.apoderado" uib-accordion-group class="panel-success" heading="Apoderado">
+            <div class="row">
+                <p ng-show="!apoderado"> Selecciona el Apoderado</p>
+                <p ng-show="apoderado">El Apoderado Seleccionado : {{apoderado.nombre + ' '+ apoderado.apellido}}</p>
+                <div ng-show="!apoderado" class="table-responsive" style="border: solid 1px #ccc;height: 300px;overflow: hidden;overflow-y: scroll;">
+                    <table class="table" st-table="displayedApoderados" st-safe-src="apoderados">
+                        <thead>
+                            <tr>
+                                <!-- <input st-search class="input-sm form-control" type="search" placeholder="buscar" style="color:black;" />-->
+                            </tr>
+                            <tr>
+                                <th>seleccionar</th>
+                                <th>nombre</th>
+                                <th>apellido</th>
+                                <th>email</th>
+                                <th>estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="apoderado in displayedApoderados">
+                                <td>
+                                    <input ng-disabled="apoderado.estado =='inactivo'" type="radio" name="selectApoderado" ng-model="$root.selectApoderado" ng-value="apoderado">
+                                </td>
+                                <td>{{apoderado.nombre}}</td>
+                                <td>{{apoderado.apellido}}</td>
+                                <td>{{apoderado.email}}</td>
+                                <td>{{apoderado.estado}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <button ng-show="!apoderado" ng-click="updateApoderado(selectApoderado)" class="btn btn-success">Actualizar</button>
+                <button ng-show="apoderado" ng-click="changeApoderado()" class="btn btn-success">Cambiar Apoderado</button>
+            </div>
+        </div>
+        <!--/.APODERADO-->
+        <!--MATERIA-->
+        <div ng-if="panel.materia" uib-accordion-group class="panel-success" heading="Materia">
+            <div class="row">
+                <p> Selecciona el Curso o la Materia</p>
+                <div class="col-sm-6">
+                    <div class="table-responsive" style="border: solid 1px #ccc;height: 300px;overflow: hidden;overflow-y: scroll;">
+                        <table class="table" st-table="displayedMaterias" st-safe-src="materias">
+                            <thead>
+                                <tr>
+                                    <!-- <input st-search class="input-sm form-control" type="search" placeholder="buscar" style="color:black;" />-->
+                                </tr>
+                                <tr>
+                                    <th>seleccionar</th>
+                                    <th>nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="materia in displayedMaterias">
+                                    <td>
+                                        <input ng-disabled="materia.estado =='inactivo'" type="checkbox" name="selectMateria" ng-model="$root.selectMateria[materia.id]"  aria-label="Slave input">
+                                    </td>
+                                    <td>{{materia.nombre}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!--<p ng-show="materia">La materia Seleccionado : {{materia.nombre + ' '+ materia.apellido}}</p>-->
+                    <div ng-repeat="materia in MateriaActive" class="col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                {{materia.nombre}}
+                            </div>
+                            <div class="col-xs-3">
+                                <button ng-click="deleteMateria(materia)" class="btn btn-icon">X</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <button ng-click="agregarMaterias()" class="btn btn-success">Agregar Materias</button>
+            </div>
+        </div>
+        <!--/.MATERIA-->
+        <!--HORARIO-->
+        <div ng-if="panel.horario" uib-accordion-group class="panel-success" heading="Horario">
+            <div style="display:inline-block; min-height:290px;">
+                <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+            </div>
+        </div>
+        <!--/.HORARIO-->
+         <!--PUNTUACION-->
+        <div ng-if="panel.puntuacion" uib-accordion-group class="panel-success" heading="Puntuacion">
+            <ng-include src="'modules/admin/assets/puntuacion.html'"></ng-include>
+        </div>
+        <!--/.PUNTUACION-->
+        <!--ELIMINAR-->
+        <div ng-if="panel.delete" uib-accordion-group class="panel-danger" heading="Borrar {{panel.delete.name}}">
+            <p>Eliminar {{panel.delete.name+' : '+data.nombre}}</p>
+            <button ng-click="delete(data.id)" class="btn btn-danger">Eliminar</button>
+        </div>
+        <!--ELIMINAR-->
+    </uib-accordion>
+    <!---->
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
+</div>

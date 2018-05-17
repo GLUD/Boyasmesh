@@ -1,0 +1,126 @@
+<div ng-include="'assets/html/navbar_2.html'">
+</div>
+<div class="app-main" style="padding-left:0 !important">
+    <div class="wrapper">
+        <div class="page" style="background:white;">
+            <div class="sidebar-backdrop"></div>
+            <!-- .page-inner -->
+            <div class="page-inner">
+                <!-- .page-title-bar -->
+                <header class="page-title-bar">
+                    <p class="lead">
+                        <span class="font-weight-bold">Hola {{user.username}}</span>
+                        <span class="d-block text-muted">Estamos mostrando el estado actual de las boyas a las  {{hora}} del dia {{dia}} del mes {{mes}} del año {{anio}} </span>
+                    </p>
+                </header>
+                <!-- /.page-title-bar -->
+                <!-- .page-section -->
+                <div class="page-section">
+                    <!-- .section-block -->
+                    <div class="section-block">
+                        <!-- metric row -->
+                        <div class="metric-row">
+                            <div class="col-lg-9">
+                            </div>
+                            <!-- metric column -->
+                            <div class="col-lg-3">
+                            </div>
+                            <!-- /metric column -->
+                        </div>
+                        <!-- /metric row -->
+                    </div>
+                    <!-- /.section-block -->
+                    <!-- grid row -->
+                    <div class="row">
+                        <!-- grid column -->
+                        <div class="col-6 col-lg-6 col-md-6 col-xs-12">
+                            <!-- .card -->
+                            <section class="card card-fluid">
+                                <!-- .card-body -->
+                                <div class="card-body">
+                                    <!-- .d-flex -->
+                                    <div class="d-flex align-items-center mb-3">
+                                        <h3 class="card-title mr-auto"> Niveles </h3>
+                                        <!-- .card-title-control -->
+                                        <div class="card-title-control">
+                                        </div>
+                                        <!-- /.card-title-control -->
+                                    </div>
+                                    <!-- /.d-flex -->
+                                    <div class="chartjs" style="height: 283px">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </section>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /grid column -->
+                        <!-- grid column -->
+                        <div class="col-6 col-lg-6 col-md-6 col-xs-12">
+                            <!-- .card -->
+                            <section class="card card-fluid">
+                                <!-- .card-body -->
+                                <div class="card-body">
+                                    <h3 class="card-title"> Nodos Conectados </h3>
+                                    <!-- easy-pie-chart -->
+                                    <div class="text-center pt-3">
+                                        <div class="chart-inline-group" style="height:214px">
+                                        </div>
+                                    </div>
+                                    <!-- /easy-pie-chart -->
+                                </div>
+                                <!-- /.card-body -->
+                                <!-- .card-footer -->
+                                <div class="card-footer">
+                                </div>
+                                <!-- /.card-footer -->
+                            </section>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /grid column -->
+                    </div>
+                    <!-- /grid row -->
+                    <!-- section-deck -->
+                    <div class="section-deck">
+                        <!-- .card -->
+                        <div class="card card-fluid">
+                            <header class="card-header"> Alertas  </header>
+                            <div class="card-body">
+                                <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">id_alerta</th>
+      <th scope="col">nivel_agua</th>
+      <th scope="col">sensor_lluvia</th>
+      <th scope="col">emisor</th>
+      <th scope="col">receptor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat = "boya in boyas">
+      <th scope="row">{{boya.id}}</th>
+      <td>{{boya.id_alerta}}</td>
+      <td>{{boya.nivel_agua}}</td>
+      <td>{{boya.sensor_lluvia}}</td>
+      <td>{{boya.emisor}}</td>
+      <td>{{boya.receptor}}</td>
+    </tr>
+  </tbody>
+</table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /section-deck -->
+                </div>
+                <!-- /.page-section -->
+            </div>
+            <!-- /.page-inner -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+   
+</script>

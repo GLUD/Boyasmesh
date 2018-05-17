@@ -1,0 +1,29 @@
+.slide-caption{
+	top:40%;
+}
+
+.slide-caption .slide-text-bg1{
+	margin:0;
+	width: 100%;
+}
+
+.slide-text-bg1 h2{
+	background: transparent;
+	box-shadow:none;
+	text-align:center;
+}
+.slide-caption .slide-text-bg2{
+	margin:0;
+	width: 100%;
+}
+
+.slide-text-bg2 span{
+	    text-shadow: 1px 1px 1px rgba(255,255,255,.7);
+}
+
+.slide-btn-area-sm {
+   text-align: center;
+   margin: 0 0 0; 
+   float: left; 
+   width: 80%; 
+}

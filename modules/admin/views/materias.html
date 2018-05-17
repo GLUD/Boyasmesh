@@ -1,0 +1,75 @@
+<!---->
+<ng-include src="'modules/admin/assets/nav.html'"></ng-include>
+<!---->
+<ng-include src="'modules/admin/assets/sidebar.html'"></ng-include>
+<!--/.sidebar-->
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <ng-include src="'modules/admin/assets/breadcrumb.html'"></ng-include>
+    <!--/.row-->
+    <br>
+    <br>
+    <uib-accordion close-others="oneAtATime">
+        <div uib-accordion-group class="panel-success" heading="Materias">
+            <!--MATERIAS-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-md-6">
+                        <smart-form title="Registrar Materia" inputs="inputs.materias" register="register.materia()" loading="dataLoading.materia" panel="panel.materias" reset="clearReset()" upload="register.materia()" upload-picture="picture.materia" data="data.materia">
+                        </smart-form>
+                    </div>
+                    <!--LISTADO-->
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel panel-primary">
+                                <list-info title="Listado de Materias" lista="materias" num-items="3" on-edit="open.edit.materia(data)" search="true" table-headers="tableHeaders.materia" type="alumnos"></list-info>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                </div>
+            </div>
+            <!-- /.MATERIAS-->
+        </div>
+        <div uib-accordion-group class="panel-success" heading="Cursos">
+            <!--CURSOS-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-md-6">
+                        <smart-form title="Registrar Curso" inputs="inputs.cursos" register="register.curso()" loading="dataLoading.curso" panel="panel.cursos" reset="clearReset()" upload="register.curso()" data="data.curso" open="open.select.materia()" btn-modal="btnModalOptions.cursos" upload-picture="picture.curso">
+                        </smart-form>
+                    </div>
+                    <!--LISTADO-->
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <list-info title="Listado de Cursos" lista="cursos" num-items="3" on-edit="open.edit.curso(data)" search="true" table-headers="tableHeaders.curso" type="alumnos"></list-info>
+                        </div>
+                    </div>
+                    <!---->
+                </div>
+            </div>
+            <!-- /.CURSOS-->
+        </div>
+        <div uib-accordion-group class="panel-success" heading="Clases">
+            <!---->
+            <div class="row">
+                <div class="col-lg-12">
+                    <uib-tabset active="activeJustified" justified="true" >
+                        <uib-tab index="0" heading="Regitrar clases">
+                            <div class="col-md-12">
+                                <smart-form title="Registrar Clase" inputs="inputs.clases" register="register.clase()" loading="dataLoading.clase" panel="panel.clases" reset="clearReset()" upload="register.clase()" data="data.clase" open="open.select.curso()" btn-modal="btnModalOptions.clases" upload-picture="picture.clase">
+                                </smart-form>
+                            </div>
+                        </uib-tab>
+                        <uib-tab index="1" heading="Lista Clases">
+                             <list-info title="Listado de Clases" lista="clases" num-items="3" on-edit="open.edit.clase(data)" search="true" table-headers="tableHeaders.clase" type="alumnos"></list-info>
+                        </uib-tab>
+                    </uib-tabset>
+                    <!--LISTADO-->
+                    <!---->
+                </div>
+            </div>
+            <!-- /.col-->
+        </div>
+    </uib-accordion>
+</div>
+<!-- /.row -->

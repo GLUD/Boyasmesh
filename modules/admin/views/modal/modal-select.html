@@ -1,0 +1,51 @@
+<!--MODAL APODERADO-->
+<div class="modal-header" style="background:blue;">
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="gridSystemModalLabel" style="color:white;">{{modal.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <!-- escojer y buscar apoderado -->
+        <div class="col-md-12">
+            {{modal.subtitle}}
+            <div class="table-responsive" style="border: solid 1px #ccc;height: 300px;overflow: hidden;overflow-y: scroll;">
+                <table class="table" st-table="displayedData" st-safe-src="modal.data">
+                    <thead>
+                        <tr ng-if="modal.search">
+                            <td colspan="{{modal.tableHeaders.length}}">
+                                <input st-search class="input-sm form-control" type="search" placeholder="buscar" style="color:black;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th ng-repeat="header in tableHeaders">{{header}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="displayedData.length == 0">
+                            <td colspan="{{modal.tableHeaders.length}}" style="text-align:center;">
+                                No se encuentra ningun registro aun en la base de datos.
+                            </td>
+                        </tr>
+                        <!---->
+                        <tr ng-repeat="data in displayedData">
+                             <td><input ng-disabled="data.estado =='inactivo'" type="radio" name="seleccionar" 
+                                ng-model="$parent.modal.select" ng-value="data"></td>
+                            <td>{{data.nombre}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div st-pagination="" st-items-by-page="modal.itemsByPage" st-displayed-pages="7"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="seleccionar()">Guardar Cambios</button>
+</div>

@@ -1,0 +1,154 @@
+<div class="">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="rating-block">
+                <h4>{{data.nombre +' '+data.apellido}}</h4>
+                <div>
+                    <img ng-src="{{url.img}}/{{data.img}}" width="100px">
+                </div>
+                <h2 class="bold padding-bottom-7">{{porcentajeCalificacion}} <small>/ 7</small></h2>
+               <!-- <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                </button>-->
+            </div>
+
+            <h4>Calificacion</h4>
+            <!---->
+            <div class="pull-left" ng-repeat="(key,calificacion) in cali " >
+              
+         
+
+                <div class="pull-left" style="width:35px; line-height:1;">
+                    <div style="height:9px; margin:5px 0;">{{key}} <span class="glyphicon glyphicon-star"></span></div>
+                </div>
+
+                <div class="pull-left" style="width:180px;">
+                        <div class="progress" style="height:9px; margin:8px 0;">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: {{(key/7)*100}}%">
+                                <span class="sr-only">80% Complete (danger)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="pull-right" style="margin-left:10px;">{{calificacion}}</div>
+            </div>
+            <!---->
+          
+        </div>
+       
+        <div class="col-sm-6">
+            <div class="review-block">
+
+                <div class="row" ng-repeat="ranking in rankinData">
+                    <div class="col-sm-3">
+                        <img ng-src="image/apoderados/{{ranking.img}}" width="60px" height="60px" class="img-rounded">
+                        <div class="review-block-name"><a href="">{{ranking.nombre}}</a></div>
+                        <div class="review-block-date"><!--January 29, 2016
+                            <br/>1 day ago--></div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="review-block-rate">
+                         
+                            <button type="button" ng-repeat="n in [1,2,3,4,5,6,7]" ng-class="{btn:true,'btn-xs':true,'btn-warning':ranking.calificacion>$index?true:false,'btn-default':ranking.calificacion<=$index?true:false,'btn-grey':ranking.calificacion<=$index?true:false}"  aria-label="Left Align">
+                                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+
+
+                            <!--<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>-->
+                        </div>
+                       <!-- <div class="review-block-title">this was nice in buy</div>-->
+                        <div class="review-block-description">{{ranking.comentario}}</div>
+                    </div>
+                </div>
+
+                <!--<hr/>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <div class="review-block-name"><a href="#">nktailor</a></div>
+                        <div class="review-block-date">January 29, 2016
+                            <br/>1 day ago</div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="review-block-rate">
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="review-block-title">this was nice in buy</div>
+                        <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <div class="review-block-name"><a href="#">nktailor</a></div>
+                        <div class="review-block-date">January 29, 2016
+                            <br/>1 day ago</div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="review-block-rate">
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="review-block-title">this was nice in buy</div>
+                        <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /container -->

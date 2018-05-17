@@ -1,0 +1,75 @@
+<header class="app-header" style="background:black;">
+    <!-- .top-bar -->
+    <div class="top-bar">
+        <!-- .top-bar-brand -->
+        <div class="top-bar-brand">
+            <a href="index.html">
+              <img src="image/assets/logo.png" height="32" alt="">
+            </a>
+        </div>
+        <!-- /.top-bar-brand -->
+        <!-- .top-bar-list -->
+        <div class="top-bar-list">
+            <!-- .top-bar-item -->
+            <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+                <!-- toggle menu -->
+                <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation">
+                    <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+                <!-- /toggle menu -->
+            </div>
+            <!-- /.top-bar-item -->
+
+            <!-- .top-bar-item -->
+            <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+                <!-- .nav -->
+                <ul class="header-nav nav">
+                    <!-- .nav-item -->
+                    <li ng-class="{'has-notified': notified,'nav-item':true }" >
+                        <a class="nav-link" href="#/inbox">
+                          <span class="oi oi-envelope-open"></span>
+                        </a>
+                    </li>
+                    <!-- /.nav-item -->
+                </ul>
+                <!-- /.nav -->
+                <!-- .btn-account -->
+                <div class="dropdown">
+                    <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="user-avatar">
+                    <!--<img src="assets/images/avatars/profile.jpg" alt="">-->
+                     <img ng-if=" !user.img_user " src="image/assets/avatar-profile.jpg" alt="Avatar">
+                            <img ng-if=" user.img_user  " src="image/users/{{user.img_user}}" alt="Avatar">
+                  </span>
+                        <span class="account-summary pr-lg-4 d-none d-lg-block">
+                    <span class="account-name">
+                      {{user.username}}
+                    </span>
+                        <span class="account-description">{{user.type}}</span>
+                        </span>
+                    </button>
+                    <div class="dropdown-arrow dropdown-arrow-left"></div>
+                    <!-- .dropdown-menu -->
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: top, left; top: 56px; left: 0px;">
+                        <h6 class="dropdown-header d-none d-md-block d-lg-none">  {{user.username}} </h6>
+                        <a class="dropdown-item" href="#/profile">
+                    <span class="dropdown-icon oi oi-person"></span> Perfil </a>
+                        <a class="dropdown-item" href="#/logout">
+                    <span class="dropdown-icon oi oi-account-logout"></span> Cerrar </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Help Center</a>
+                        <a class="dropdown-item">Ask Forum</a>
+                        <a class="dropdown-item">Keyboard Shortcuts</a>
+                    </div>
+                    <!-- /.dropdown-menu -->
+                </div>
+                <!-- /.btn-account -->
+            </div>
+            <!-- /.top-bar-item -->
+        </div>
+        <!-- /.top-bar-list -->
+    </div>
+    <!-- /.top-bar -->
+</header>

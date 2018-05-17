@@ -1,0 +1,51 @@
+<!--MODAL APODERADO-->
+<div class="modal-header" style="background:blue;">
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="gridSystemModalLabel" style="color:white;">Apoderado</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <!-- escojer y buscar apoderado -->
+        <div class="col-md-12">
+            Selecciona el Apoderado
+            <div class="table-responsive" style="border: solid 1px #ccc;height: 300px;overflow: hidden;overflow-y: scroll;overflow-x:scroll">
+                <table class="table" st-table="displayedApoderados" st-safe-src="apoderados">
+                    <thead>
+                        <tr>
+                           <td colspan="5"> <input st-search class="input-sm form-control" type="search" placeholder="buscar" style="color:black;" /></td>
+                        </tr>
+                        <tr>
+                        <th>seleccionar</th>
+                        <th>nombre</th>
+                        <th>apellido</th>
+                        <th>email</th>
+                        <th>estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="apoderado in displayedApoderados">
+                            <td><input ng-disabled="apoderado.estado =='inactivo'" type="radio" name="seleccionar" 
+                                ng-model="$parent.select" ng-value="apoderado"></td>
+                            <td>{{apoderado.nombre}}</td>
+                            <td>{{apoderado.apellido}}</td>
+                            <td>{{apoderado.email}}</td>
+                            <td>{{apoderado.estado}}</td>
+                        </tr>
+                    </tbody>
+                     <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                       <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                </table>
+             
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="seleccionar()">Guardar Cambios</button>
+</div>

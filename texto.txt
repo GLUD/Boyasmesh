@@ -1,0 +1,46 @@
+la aplicacion 
+
+tiene los url regados se deberian poder pasar con una variable global 
+
+// 
+
+{-al registrar debe verificar primero que no exista el correo ingresado en la base de datos }
+
+{-se debe buscar el correo en las dos bases de datos y si alguna da true no debe proceder }
+
+{-si da false continua con el registro }
+
+
+
+- debe crear una clave aleatoria y enviarla al correo para poder verificar el inicio de sesion 
+
+- al iniciar por primera vez debe recomendar cambiar la contraseña 
+
+- esta debe estar encriptado con un hash basico 
+
+
+
+{.al iniciar sesion lo primero que tiene que verificar es si pertenece a fabricante o comercializadora }
+
+
+
+ahora de donde se van a sacar los productos de los usuarios 
+
+
+por ejemplo ellos tienen un id asociado 
+
+/**/
+
+ya tenemos un marco de inicio de session y registro en el cual se mantiene una estructura modular en todas las areas 
+
+las bases de datos del usuario estan creada de modo que el identificador sirva para extraer informacion de diferentes tablas como la llave primaria, a su vez el campo type sirve para identificar el tipo de usuario que esta haciendo uso de la plataforma 
+
+
+
+en el formulario de registro se tiene los mismos datos:
+
+ type
+ username 
+ email 
+ pass 
+ valid 

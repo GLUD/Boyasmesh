@@ -1,0 +1,75 @@
+﻿
+<main class="auth auth-floated" id="login">
+    <!-- form -->
+    <div class="auth-form">
+        <div class="mb-4">
+            <div class="mb-3">
+                <img class="rounded" src="image/assets/logo_marca.png" alt="" height="72">
+            </div>
+            <h1 class="h3"> Ingresar </h1>
+        </div>
+        <p class="text-left mb-4"> No Tienes Cuenta?
+            <a href="#/register">Crear Una</a>
+        </p>
+        <!-- .form-group -->
+        <div ng-show="error" class="alert alert-danger has-icon" role="alert">
+            <div class="alert-icon">
+                <span class="oi oi-bell"></span>
+            </div>
+            {{error}}
+        </div>
+        <form name="form" ng-submit="login()" role="form">
+            <div class="form-group mb-4">
+                <label class="d-block text-left" for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control form-control-lg" ng-model="username" placeholder="Email" required autofocus="">
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Usuario es requerido</span>
+            </div>
+            <!-- /.form-group -->
+            <!-- .form-group -->
+            <div class="form-group mb-4">
+                <label class="d-block text-left" for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Contraseña" required="" ng-model="password">
+                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
+            </div>
+            <!-- /.form-group -->
+            <!-- .form-group -->
+            <div class="form-group mb-4">
+                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-lg btn-primary btn-block" style="margin:0">Login</button>
+            </div>
+            <!-- /.form-group -->
+            <!-- .form-group -->
+           <!-- <div class="form-group text-center">
+                <div class="custom-control custom-control-inline custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="remember-me">
+                    <label class="custom-control-label" for="remember-me">Keep me sign in</label>
+                </div>
+            </div>-->
+            <!-- /.form-group -->
+            <!-- recovery links -->
+            <p class="py-3">
+                <!--<a href="auth-recovery-username.html" class="link">Forgot Username?</a>
+                <span class="mx-2">·</span>-->
+                <a href="#/auth/recovery" class="link">Olvido la Contraseña?</a>
+            </p>
+            <!-- /recovery links -->
+            <!-- copyright -->
+            <p class="px-3 text-muted text-center"> 
+                © 2018 Desarrollado por CryptoInvestment Cucuta Para Macroferia 
+                
+                <a href="#">Terminos </a> de
+                <a href="#">Privacidad</a> 
+                
+            </p>
+        </form>
+    </div>
+    <!-- /.auth-form -->
+    <!-- .auth-announcement -->
+    <section id="announcement" class="auth-announcement" style="background-image: url(image/bg/boyasmesh-logo-bg.png);    background-position-x: center;">
+        <!--<div class="announcement-body">
+            <h2 class="announcement-title"> How to Prepare for an Automated Future </h2>
+            <a href="#" class="btn btn-warning">
+            <i class="fa fa-fw fa-angle-right"></i> Check Out Now</a>
+        </div>-->
+    </section>
+    <!-- /.auth-announcement -->
+</main>

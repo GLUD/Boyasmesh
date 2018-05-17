@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="MacroApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+    <link rel="shortcut icon" href="" />
+    <!-- Font Awesome -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">-->
+    <title>Macroferia</title>
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
+    <!-- Latest compiled and minified CSS -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/ui-bootstrap-custom-2.5.0-csp.css">
+
+    <link ng-if="!styleadmin" rel="stylesheet" type="text/css" href="css/all.css" />
+
+    <link  rel="stylesheet" type="text/css" href="css/all2.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/navigation.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <link ng-if="styleadmin" rel="stylesheet" type="text/css" href="css/style-admin.css" />-->
+    <link rel="stylesheet" href="lib/bootstrap4/assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/uselooper.css" />
+
+     <link rel="stylesheet" href="http://uselooper.com/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+
+<style type="text/css">
+.width-100{
+    width: 100%;
+}
+.float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+    margin-top: 22px;
+}
+</style>
+
+<style type="text/css">
+/* Styles go here */
+
+.ng-modal-overlay { /* A dark translucent div that covers the whole screen */ position: absolute; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: #000000; opacity: 0.5; } .ng-modal-overlay2 { /* A green translucent div that covers the whole screen */ position: absolute; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: green; opacity: 0.5; } .ng-modal-dialog { /* A centered div above the overlay with a box shadow. */ z-index: 10000; position: absolute; width: 50%; /* Default */ /* Center the dialog */ top: 25%; left: 25%; /*transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%);*/ background-color: #fff; box-shadow: 4px 4px 80px #000; } .ng-modal-dialog-content { font-family: 'Roboto'; font-size: 14pt; color: black; padding: 10px; text-align: left; } .ng-modal-close { position: absolute; top: 3px; right: 5px; padding: 5px; cursor: pointer; font-size: 120%; display: inline-block; font-weight: bold; font-family: 'arial', 'sans-serif'; } /*----------------------------------------------------------------- ANIMATIONS -------------------------------------------------------------------*/ .ng-modal-dialog.ng-hide-add, .ng-modal-dialog.ng-hide-remove { display: block!important; } .ng-modal-dialog.ng-hide-remove { -webkit-animation: bounceIn 1s; -moz-animation: bounceIn 1s; -ms-animation: bounceIn 1s; animation: bounceIn 1s; } .ng-modal-dialog.ng-hide-add { -webkit-animation: bounceOut .8s; -moz-animation: bounceOut .8s; -ms-animation: bounceOut .8s; animation: bounceOut .8s; } .ng-modal-dialog.ng-enter { -webkit-animation: rollIn 1s; -moz-animation: rollIn 1s; -ms-animation: rollIn 1s; animation: rollIn 1s; } .ng-modal-dialog.ng-leave { -webkit-animation: bounceOut .8s; -moz-animation: bounceOut .8s; -ms-animation: bounceOut .8s; animation: bounceOut .8s; }
+</style>
+</head>
+
+<body>
+    <div ng-view style="height: 100%;"></div>
+    <script src="http://uselooper.com/assets/vendor/jquery/jquery.min.js"></script>
+    <!--<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+    <!---->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://content.nextu.com/js/sticky-kit.min.js"></script>
+    <!---->
+    <script src="//code.angularjs.org/1.5.9/angular.js"></script>
+    <script src="//code.angularjs.org/1.5.9/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.5.9/angular-resource.js"></script>
+    <script src="//code.angularjs.org/1.5.9/angular-animate.js"></script>
+    <script src="//code.angularjs.org/1.5.9/angular-touch.js"></script>
+    <script src="//code.angularjs.org/1.5.9/angular-cookies.js"></script>
+    <script src="//code.angularjs.org/1.5.9/angular-sanitize.js"></script>
+   
+    <!---->
+    <script src="lib/bootstrap/ui-bootstrap-custom-tpls-2.5.0.js"></script>
+    <!---->
+    <script src="scripts/app.js"></script>
+
+   
+    <!---->
+
+    <script src="modules/home/controllers.js"></script>
+    <!---->
+
+    <script src="modules/authentication/services.js"></script>
+    <script src="modules/authentication/controllers.js"></script>
+    <!--<script src="modules/home/controllers.js"></script>-->
+
+    <script src="modules/dashboard/controllers.js"></script>
+
+
+
+ 
+
+   
+    <script src="modules/admin/controllers.js"></script>
+    <script src="modules/admin/services.js"></script>
+
+
+   
+    <!--services Admin-->
+  
+    <!--/.Admin-->
+    <!---->
+    <!--<script src="modules/http/services.js"></script>-->
+    <!---->
+    <!--
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+    
+
+
+    <script src="http://uselooper.com/assets/vendor/bootstrap/js/popper.min.js"></script>
+    <script src="http://uselooper.com/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="http://uselooper.com/assets/vendor/stacked-menu/stacked-menu.min.js"></script>
+    <script src="http://uselooper.com/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    
+    <script src="http://uselooper.com/assets/javascript/main.min.js"></script>
+ 
+
+</body>
+
+</html>
