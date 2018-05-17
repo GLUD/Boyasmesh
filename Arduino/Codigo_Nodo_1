@@ -1,0 +1,68 @@
+#include <ESP8266WiFi.h>
+
+// configuracion de la comunicacion del router
+const char *ssid =  "s0d0ma";    
+const char *pass =  "123456";
+const char *nombre_nodo = "Nodo1";
+const int sensor_agua = A0;
+
+int toma_datos()
+{
+  int promediado = 0;
+  for(int i = 0; i < 30 ; i++)
+  {
+    promediado += analogRead(sensor_agua);
+  }
+     
+  return promediado/30; 
+}
+
+
+void router_connect()
+{
+  WiFi.begin(ssid, pass);
+  // configuracion de serial para debug de la vuelta
+  Serial.begin(9600);
+  // realiza la conexion del router y se queda alli hasta que se conecte
+   
+  while (WiFi.status() != WL_CONNECTED){
+    delay(500);
+  }
+}
+
+void setup() 
+{
+  
+  router_connect();
+}
+ 
+void loop() 
+{
+  // sentencia del verificacion de conexion
+  router_connect();
+
+  // tomar medidas / 10 
+  int medida = toma_datos() / 10;
+  
+  //realizar criterio
+  int flag_alerta = 0;  
+  flag_alerta = (medida == 0) ? 1 : flag_alerta;
+  flag_alerta = (medida == 1) ? 1 : flag_alerta;
+  flag_alerta = (medida >= 1) ? 2 : flag_alerta;
+
+  // Crear string de las manos a mano
+  // nombre=capa1,sensor_lluvia=3.00,nivel_agua=0.33,id_alerta=3
+  String fagua=String(float(medida));
+  Serial.println(fagua);
+  Serial.print("nombre=");
+  Serial.print(nombre_nodo);
+  Serial.print(",sensor_lluvia=0.00");
+  Serial.print(",nivel_agua=");
+  Serial.print(fagua);
+  Serial.print(",id_alerta=");
+  Serial.println(medida);
+  
+  // Enviar por sockets al arduino
+  
+  delay(500);
+}
