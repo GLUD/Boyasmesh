@@ -12,5 +12,19 @@ ALERTAS
 - Alerta Roja: Nos Informa que la altura de las aguas fluviales se encuentran en un rango critico y por lo tanto muy probablemente sea necesario una evacuacion. 
 
 TECNOLOGIAS IMPLEMENTADAS
+=========================
+- Gestor De Base De Datos: Postgresql
+- Leguaje De Programacion a Nivel Servidor: PHP
+- Framework para el manejo de los Datos Desde El Cliente: Angular.JS
+- Arduino NODEMCU V3
+- Raspberry PI
+- Lenguaje De Programacion a Nivel Del Raspberry: Python
+- Router en donde se conectan los arduinos y el raspberry
 
-- Gestor De Base De Datos Postgresql
+COMO FUNCIONA EL PROYECTO
+=========================
+-Se van a montar varios "Nodos" los cuales son distintos NODEMCU V3 posicionados en distintos puntos de las aguas fluviales que se van a encargar de realizar las distintas lecturas y luego enviarlas al servidor (por medio del raspberry) y/o telegram para luego realizar la respectiva alerta segun condiciones.
+
+
+
+
