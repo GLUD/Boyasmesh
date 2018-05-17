@@ -32,10 +32,10 @@ COMO FUNCIONA EL PROYECTO
 
 PRESENTADO POR 
 ==============
--Kevin Astros <Hardware y Firmware y Sockets>
--Holmes Ayala <Base De Datos,Bot>
--Jonathan Cardenas <Front End Y Diseño>
--Edgar Krejci <Backend,Mecanismo De Recibir, y De Alerta>
+Kevin Astros (Hardware y Firmware y Sockets),
+Holmes Ayala (Base De Datos,Bot),
+-Jonathan Cardenas (Front End Y Diseño),
+-Edgar Krejci (Backend,Mecanismo De Recibir, y De Alerta)
 
 Representantes De La Universidad De Cundinamarca Semillero LinudecX
 
