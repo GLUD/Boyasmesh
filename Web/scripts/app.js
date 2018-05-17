@@ -12,20 +12,10 @@ angular.module('Dashboard', []);
 
 angular.module('Admin', []);
 angular.module('Admin.services', []);
-/*angular.module('Alumnos', []);
-angular.module('Apoderados', []);
-angular.module('Docentes', []);
-angular.module('Courses', []);
-
-angular.module('Admin.alumnos', []);
-angular.module('Admin.apoderados', []);
-angular.module('Admin.tutores', []);
-angular.module('Admin.materias', []);
-*/
-//
 
 
-angular.module('MacroApp', [
+
+angular.module('BoyasApp', [
 
     //services
     //'Data',
@@ -34,18 +24,6 @@ angular.module('MacroApp', [
     //controllers
     'Dashboard',
     'Intro',
-    //'Alumnos',
-    //'Apoderados',
-    //'Courses',
-    //'Docentes',
-    //
-    //'Admin',
-    //'Admin.alumnos',
-    //'Admin.apoderados',
-    //'Admin.tutores',
-    //'Admin.materias',
-    //'Admin.services',
-    //
     
     //externos
     'ngRoute',
@@ -54,7 +32,8 @@ angular.module('MacroApp', [
     'ngTouch',
     'ngResource',
     'ngSanitize',
-    'ui.bootstrap'  
+    'ui.bootstrap',
+    'chart.js'  
 ])
 
 .config(['$routeProvider', function ($routeProvider) {
@@ -121,32 +100,6 @@ angular.module('MacroApp', [
         });
     }])
 
-.run(['$rootScope','$location',
-    function($root,$location){
-
-      $root.styleadmin = false;
-
-      //$root.produts = {};
-
-        $root.admin = {
-            iconAlumnos:'sunglasses',
-            iconApoderados:'eye-open',
-            iconTutores : 'education',
-            iconMaterias:'file',
-            iconDashboard : 'tasks',
-            location : function(){
-                let location;
-                location = $location.url();
-                location = location.split('/')[location.split('/').length-1];
-                let  l = location.charAt(0).toUpperCase();
-                let ocation = location.slice(1,location.legth)
-                return l+ocation;
-            }
-
-        };
-        
-
-    }]);
 
 
 

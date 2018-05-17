@@ -2,8 +2,8 @@
 
 angular.module('Dashboard')
 
-    .controller('DashboardController', ['$scope', '$rootScope', '$timeout','$resource','$interval',
-        function($scope, $rootScope, $timeout,$resource,$interval) {
+    .controller('DashboardController', ['$scope', '$rootScope', '$timeout', '$resource','$interval',
+        function($scope, $rootScope, $timeout, $resource,$interval) {
             // reset login status
             $scope.modalShown = false;
             console.log($rootScope);
@@ -22,12 +22,17 @@ angular.module('Dashboard')
             $scope.hora =$scope.CurrentDate.getHours();
             $scope.anio = $scope.CurrentDate.getFullYear();
 
-            console.log($scope);
+            $scope.inbox = {};
 
 
-            $timeout(500)
+          
+
+
+
+            $timeout(5000)
                 .then((result) => {
-               
+                    $scope.datos = [
+                    50,50,50]
                 })
 
             var data = $resource('php/:id.php', { id: '@id' }, {
@@ -37,44 +42,31 @@ angular.module('Dashboard')
             })
 
              $scope.updateData = function(){
-                data.get({id:'alertas_actuales'},function(result){
+                /*data.get({id:'alertas_actuales'},function(result){
                 console.log(result.data);
                 $scope.boyas = result.data;
-              })
+              })*/
             }
             $scope.updateData();
+
+            $scope.etiquetas = ['CAPA1', 'CAPA2', 'CAPA3'];
+            $scope.series = ['Niveles'];
+
+            /*
+            $scope.datos = [
+                $scope.boyas[0].nivel_agua, 
+                $scope.boyas[1].nivel_agua, 
+                $scope.boyas[2].nivel_agua, 
+            ]*/
+
+            $scope.datos = [
+                [65, 59, 80],
+               
+            ];
+
+           
             $interval($scope.updateData,5000);
             
-
-            $scope.myChart = function(){
-                  console.log('aqui');
-var ctx = document.getElementById('myChart').getContext('2d');
-console.log($scope.boyas);
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["Capa1", "Capa2", "Capa3"],
-        datasets: [{
-            label: "NIVELES",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [$scope.boyas[0].nivel_agua,$scope.boyas[1].nivel_agua,$scope.boyas[2].nivel_agua],
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-            }
-
-            $timeout(3000).then(function(){
-                  $scope.myChart()
-            })
-          
-           
 
 
             console.log('home');

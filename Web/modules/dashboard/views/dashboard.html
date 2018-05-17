@@ -1,3 +1,21 @@
+<style type="text/css">
+.red-bar {
+    height: 100px;
+    width: 30px;
+
+    background: red;
+    transform-origin: 0% 0%;
+}
+
+.red-bar.ng-enter {
+    transition: all ease-in 0.25s;
+    height: 0px;
+}
+
+.red-bar.ng-enter-active {
+    height: 100px
+}
+</style>
 <div ng-include="'assets/html/navbar_2.html'">
 </div>
 <div class="app-main" style="padding-left:0 !important">
@@ -47,8 +65,8 @@
                                         <!-- /.card-title-control -->
                                     </div>
                                     <!-- /.d-flex -->
-                                    <div class="chartjs" style="height: 283px">
-                                        <canvas id="myChart"></canvas>
+                                    <div class="container-fluid">
+                                        <canvas class="chart chart-bar" chart-data="datos" chart-labels="etiquetas" chart-series="series"></canvas>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -85,30 +103,30 @@
                     <div class="section-deck">
                         <!-- .card -->
                         <div class="card card-fluid">
-                            <header class="card-header"> Alertas  </header>
+                            <header class="card-header"> Alertas </header>
                             <div class="card-body">
                                 <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">id_alerta</th>
-      <th scope="col">nivel_agua</th>
-      <th scope="col">sensor_lluvia</th>
-      <th scope="col">emisor</th>
-      <th scope="col">receptor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat = "boya in boyas">
-      <th scope="row">{{boya.id}}</th>
-      <td>{{boya.id_alerta}}</td>
-      <td>{{boya.nivel_agua}}</td>
-      <td>{{boya.sensor_lluvia}}</td>
-      <td>{{boya.emisor}}</td>
-      <td>{{boya.receptor}}</td>
-    </tr>
-  </tbody>
-</table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">id</th>
+                                            <th scope="col">id_alerta</th>
+                                            <th scope="col">nivel_agua</th>
+                                            <th scope="col">sensor_lluvia</th>
+                                            <th scope="col">emisor</th>
+                                            <th scope="col">receptor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="boya in boyas">
+                                            <th scope="row">{{boya.id}}</th>
+                                            <td>{{boya.id_alerta}}</td>
+                                            <td>{{boya.nivel_agua}}</td>
+                                            <td>{{boya.sensor_lluvia}}</td>
+                                            <td>{{boya.emisor}}</td>
+                                            <td>{{boya.receptor}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <!-- /.card -->
@@ -121,6 +139,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-   
-</script>
