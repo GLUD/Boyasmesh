@@ -1,0 +1,193 @@
+-- FUNCION ENCARGADA DE OBTENER LA COMUNICACION ALMACENADA MAS RECIENTE 
+-- RETURN: TEXTO EN FORMATO JSON CON LOS DATOS DE LA ULTIMA CONEXION
+CREATE OR REPLACE FUNCTION public.ultima_comunicacion(
+	)
+    RETURNS text
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare
+	-- VARIABLE DE TEXTO PARA FORMAR UN JSON
+	_json text := '[';
+	-- VARIABLE PARA RECORRER LA TABLA 'DATO'
+	dato public.dato%ROWTYPE;
+begin
+	-- RECORRER LA TABLA DATO
+	for dato in (select * from public.dato order by id desc)
+	loop
+		-- FORMANDO EL JSON
+		_json := _json || to_json(dato);
+		-- VERIFICAMOS EL FIN DE LA COMUNICACION
+		if (dato.receptor is null) then
+			-- TERMINAMOS EL JSON
+			_json := _json || ']';
+			-- RETORNAR JSON
+			return _json;
+		end if;
+		_json := _json || ',';
+	end loop;
+	-- SI NO HAY UNA ULTIMA COMUNICACION RETORNA NULL
+	return null;
+end
+
+$BODY$;
+
+ALTER FUNCTION public.ultima_comunicacion()
+    OWNER TO postgres;
+
+
+
+-- FUNCION ENCARGADA DE AGREGAR UN NUEVO DATO GENERADO POR LAS BOYAS
+-- PARAMETRO: UN TEXTO EN FORMATO JSON
+CREATE OR REPLACE FUNCTION public.agregar_dato(
+	_dato text)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare
+	-- VARIABLE PARA PARSEAR Y GUARDAR EL TEXTO EN FORMATO JSON
+	_json json;
+	-- PARA RECORRER DATOS DEL _JSON
+	r json;
+begin
+	_json := _dato::json; -- PARSEO DEL TEXTO A JSON
+	-- CADA NUEVO DATO SE ENVIA A LA FUNCION DE NOTIFICAR ALERTA
+	for r in (select json_array_elements(_json)) loop
+		perform public.notificar_alerta( r );
+	end loop;
+	-- RECORREMOS CADA UNO DE LOS DATOS
+	for r in (select json_array_elements(_json))
+	loop
+		-- PREGUNTAMOS SI EL DATO LLEGO ERRONEO
+		if ((r->>'id_alerta')::integer = 0) then
+		-- GUARDAR EN TABLA DE ERRORES
+			INSERT INTO public.error(fecha) VALUES (CURRENT_TIMESTAMP);
+		else
+			-- SI ES UN DATO VALIDO LO AGREGAMOS A LA TABLA DE DATO
+			INSERT INTO public.dato
+			(emisor, receptor, sensor_lluvia, nivel_agua, fecha, id_alerta) 
+			VALUES 
+			(r->>'emisor', 
+					r->>'receptor', 
+			CAST (r->>'sensor_lluvia' AS DOUBLE PRECISION), 
+			CAST (r->>'nivel_agua' AS DOUBLE PRECISION), 
+			CURRENT_TIMESTAMP,
+			(r->>'id_alerta')::integer);
+		end if;
+		-- MENSAJE DE TESTEO
+		raise notice '%', r;
+	end loop;
+end
+
+$BODY$;
+
+ALTER FUNCTION public.agregar_dato(text)
+    OWNER TO postgres;
+
+
+
+-- FUNCION ENCARGADA DE NOTIFICAR UNA NUEVA ALERTA POR PARTE DE LAS BOYAS
+-- PARAMETRO: JSON CON LA INFORMACION PARA NOTIFICAR LA ALERTA
+CREATE OR REPLACE FUNCTION public.notificar_alerta(
+	_dato json)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare
+	ultima_comunicacion json;
+	r json;
+	aux text;
+	alerta public.alerta%ROWTYPE;
+begin
+	-- PREGUNTAMOS SI EXISTE UNA ULTIMA COMUNICACION, SI NO ES ASI ENTONCES
+	-- NO HAY ALERTA POR NOTIFICAR
+	if( (select * from public.ultima_comunicacion()) is null ) then
+		return;
+	end if;
+	-- SI EXISTE UNA ULTIMA COMUNICACION LA OBTENEMOS
+	ultima_comunicacion := (select * from public.ultima_comunicacion())::json;
+	-- RECORRER LA ULTIMA COMUNICACION
+	for r in (select json_array_elements(ultima_comunicacion))
+	loop
+		-- BUSCAMOS EN LA ULTIMA COMUNICACION EL DATO QUE VA A GENERAR LA NOTIFICACION
+		if (_dato->>'emisor' = r->>'emisor') then
+			-- VERIFICAMOS QUE SEA UNA ALERTA NOTIFICABLE (NO SE NOTIFICAN ALERTAS DE "ESTOY BIEN" O DE "ERROR")
+			if (_dato->>'id_alerta' <> r->>'id_alerta' and (_dato->>'id_alerta')::integer <> 1 and (_dato->>'id_alerta')::integer <> 0) then
+				-- Al llegar aqui significa que la boya cambio de estado
+				raise notice 'Cambio de estado: %', _dato->>'emisor';
+				-- OBTENER EL TIPO DE ALERTA QUE GENERO LA BOYA
+				select * into alerta from public.alerta where id = (_dato->>'id_alerta')::integer;
+				raise notice '%', _dato;
+				-- INSERTAR EN ALERTAS DISPONIBLES PARA SER CONSUMIDAS
+				INSERT INTO public.alerta_disponible(emisor, tipo, descripcion, fecha) VALUES 
+				(_dato->>'emisor', alerta.tipo, alerta.descripcion, CURRENT_TIMESTAMP);
+				
+			end if;
+		end if;
+	end loop;
+end
+
+$BODY$;
+
+ALTER FUNCTION public.notificar_alerta(json)
+    OWNER TO postgres;
+
+
+
+-- FUNCION ENCARGADA DE OBTENER LAS ALERTAS DISPONIBLES
+-- RETURN: TEXTO EN FORMATO JSON CON LAS ALERTAS A NOTIFICAR
+CREATE OR REPLACE FUNCTION public.consumir_alertas(
+	)
+    RETURNS text
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare
+	-- TEXTO PARA CREAR UN JSON
+	texto text := '[';
+	-- PARA RECORRER  LAS ALERTAS DISPONIBLES
+	alerta_disponible public.alerta_disponible%ROWTYPE;
+	contador integer := 0;
+	cantidad_alertas integer := 0;
+begin
+	-- OBTENER LA CANTIDAD DE ALERTAS DISPONIBLES
+	cantidad_alertas := (select count(*) from public.alerta_disponible);
+	-- RECORRER ALERTAS DISPONIBLES
+	for alerta_disponible in (select * from public.alerta_disponible)
+	loop
+		-- FORMANDO EL JSON
+		texto := texto || to_json(alerta_disponible);
+		contador := contador + 1;
+		if (cantidad_alertas <> contador) then
+			texto := texto || ',';
+		end if;
+	end loop;
+	texto := texto || ']';
+	-- YA QUE SE FORMO EL JSON, BORRAMOS LAS ALERTAS DISPONIBLES DE LA TABLA
+	truncate public.alerta_disponible;
+	-- SI NO HABIAN ALERTAS POR NOTIFICAR, RETORNAR NULL
+	if (texto = '[]') then
+		return null;
+	end if;
+	-- SI HABIAN ALERTAS POR NOTIFICAR, RETORNAR TEXTO EN FORMATO JSON
+	return texto;
+end
+
+$BODY$;
+
+ALTER FUNCTION public.consumir_alertas()
+    OWNER TO postgres;
