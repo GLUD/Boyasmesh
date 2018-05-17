@@ -2681,7 +2681,7 @@ require('db.php');
 // }
 
 // uncomment the lines below for form+session based authentication (see "login.html"):
-
+/*
 $auth = new PHP_API_AUTH(array(
 	'authenticator'=>function($user,$pass){ 
 
@@ -2748,48 +2748,48 @@ if (empty($_SESSION['user']) || !$auth->hasValidCsrfToken()) {
 	header('HTTP/1.0 401 Unauthorized');
 	exit(0);
 }
-
+*/
 //uncomment the lines below when running in stand-alone mode:
 
- $api = new PHP_CRUD_API(array(
+ /*$api = new PHP_CRUD_API(array(
  	'dbengine'=>'MySQL',
  	'hostname'=>'localhost',
  	'username'=>'root',
  	'password'=>'',
  	'database'=>'macroferia',
  	'charset'=>'utf8',
- 	/*'table_authorizer'=>function($cmd,$db,$tab) { 
+ 	'table_authorizer'=>function($cmd,$db,$tab) { 
 
     		if ($tab == 'producto') {
     			return true;
     		}
-    },*/
- ));
- $api->executeCommand();
+    },
+ ));*/
+// $api->executeCommand();
 
 // For Microsoft SQL Server 2012 use:
 
-// $api = new PHP_CRUD_API(array(
-// 	'dbengine'=>'SQLServer',
-// 	'hostname'=>'(local)',
-// 	'username'=>'',
-// 	'password'=>'',
-// 	'database'=>'xxx',
-// 	'charset'=>'UTF-8'
-// ));
-// $api->executeCommand();
-
+/* $api = new PHP_CRUD_API(array(
+ 	'dbengine'=>'SQLServer',
+ 	'hostname'=>'(local)',
+ 	'username'=>'',
+ 	'password'=>'',
+ 	'database'=>'xxx',
+ 	'charset'=>'UTF-8'
+ ));
+ $api->executeCommand();
+*/
 // For PostgreSQL 9 use:
 
-// $api = new PHP_CRUD_API(array(
-// 	'dbengine'=>'PostgreSQL',
-// 	'hostname'=>'localhost',
-// 	'username'=>'xxx',
-// 	'password'=>'xxx',
-// 	'database'=>'xxx',
-// 	'charset'=>'UTF8'
-// ));
-// $api->executeCommand();
+ $api = new PHP_CRUD_API(array(
+ 	'dbengine'=>'PostgreSQL',
+ 	'hostname'=>'localhost',
+ 	'username'=>'postgres',
+ 	'password'=>'1234',
+ 	'database'=>'hoyas',
+ 	'charset'=>'UTF8'
+ ));
+ $api->executeCommand();
 
 // For SQLite 3 use:
 

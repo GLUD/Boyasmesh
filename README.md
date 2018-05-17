@@ -30,6 +30,14 @@ COMO FUNCIONA EL PROYECTO
 =========================
 -Se van a montar varios "Nodos" los cuales son distintos NODEMCU V3 posicionados en distintos puntos de las aguas fluviales que se van a encargar de realizar las distintas lecturas y luego enviarlas al servidor (por medio del raspberry) y/o telegram para luego realizar la respectiva alerta segun condiciones.
 
+PRESENTADO POR 
+==============
+-Kevin Astros (Hardware y Firmware y Sockets)
+-Holmes Ayala (Base De Datos,Bot)
+-Jonathan Cardenas (Front End Y Diseño)
+-Edgar Krejci (Backend,Mecanismo De Recibir, y De Alerta)
+
+Representantes De La Universidad De Cundinamarca Semillero LinudecX
 
 
 
